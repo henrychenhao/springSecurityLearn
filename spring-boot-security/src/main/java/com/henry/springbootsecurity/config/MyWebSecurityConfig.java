@@ -1,9 +1,11 @@
 package com.henry.springbootsecurity.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * 注入一个自定义的配置
@@ -11,6 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 @Configuration
 public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    UserDetailsService userDetailsService;
 
     /**
      * 配置安全拦截策略
@@ -32,8 +37,11 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //其他请求需要登录
                 .anyRequest().authenticated()
                 .and() //并行条件
+                .rememberMe().userDetailsService(userDetailsService)
+                .and()
                 //可从默认的login页面登录，并且登录后跳转到main.html
                 .formLogin()
+                .loginPage("/index.html").loginProcessingUrl("/login")
                 .defaultSuccessUrl("/main.html")
                 .failureUrl("/common/loginFailed");
     }

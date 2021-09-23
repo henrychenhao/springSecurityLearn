@@ -6,7 +6,6 @@
         <groupId>com.henry</groupId>
         <artifactId>springSecurityParent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.henry</groupId>
     <artifactId>security01</artifactId>

@@ -24,7 +24,8 @@
             }
             $.post("/login",{
                 "username":$("#userName").val(),
-                "password":$("#userPass").val()
+                "password":$("#userPass").val(),
+                "remember-me":$("#check").val()
             },function (response) {
                 if(response){
                     location.href="main.html";
